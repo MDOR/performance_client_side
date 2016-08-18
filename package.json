@@ -30,9 +30,11 @@
   },
   "homepage": "https://github.com/MDOR/performance_client_side#readme",
   "dependencies": {
-    "jquery": "^3.1.0"
+    "jquery": "^3.1.0",
+    "reveal": "0.0.4"
   },
   "devDependencies": {
+    "browserify": "^13.1.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-livereload": "^3.8.1",
