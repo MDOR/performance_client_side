@@ -1,7 +1,14 @@
 /* Colors */
 $paradiso: #3c948b;
 $mine-shaft: #343434;
+
+/* Times */
+$default-time: 1s;
+
+html,
 body {
+  min-width: 500px;
+  min-height: 500px;
   background-color: $mine-shaft;
   color: white;
 }
@@ -14,4 +21,58 @@ h1, h2, h3, h4, h5, h6 {
 h2 > a {
   color: inherit;
   text-decoration: none;
+}
+
+/*Heart*/
+.heart-container {
+  display: block;
+  height: 500px;
+  width: 100%;
+  min-width: 500px;
+}
+
+.heart {
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  position: relative;
+  top: 0;
+  background-color: red;
+  &:after,
+  &:before {
+    content: ' ';
+    border-radius: 50%;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 0;
+    background-color: red;
+  }
+  &:before {
+    left: 0px;
+    top: -14px;
+  }
+  &:after {
+    left: 14px;
+  }
+  .slides .present & {
+    animation: heart-animation 1s ease infinite;
+    top: 250px;
+  }
+}
+
+
+.circle {
+  
+}
+
+
+@keyframes heart-animation {
+  0%, 100% {
+    transform: scale(1) rotate(-45deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(-45deg);
+  }
 }
