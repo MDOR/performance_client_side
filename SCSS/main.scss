@@ -1,0 +1,17 @@
+/* Colors */
+$paradiso: #3c948b;
+$mine-shaft: #343434;
+body {
+  background-color: $mine-shaft;
+  color: white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto';
+  color: $paradiso;
+}
+
+h2 > a {
+  color: inherit;
+  text-decoration: none;
+}

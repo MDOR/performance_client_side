@@ -1,0 +1,12 @@
+/* Colors */
+body {
+  background-color: #343434;
+  color: white; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto';
+  color: #3c948b; }
+
+h2 > a {
+  color: inherit;
+  text-decoration: none; }
