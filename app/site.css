@@ -1888,9 +1888,17 @@ body {
   background-color: #343434;
   color: white; }
 
+* {
+  font-family: 'Roboto', Helvetica; }
+
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto';
   color: #3c948b; }
+
+h1 {
+  font-size: 67px !important; }
+
+h2 {
+  font-size: 60px !important; }
 
 blockquote {
   padding: 15px !important;
@@ -1900,12 +1908,41 @@ blockquote {
   box-shadow: none !important;
   border-left: 3px solid #E1991C !important; }
 
-p {
-  font-size: 35px !important; }
+div, p {
+  font-size: 26px !important; }
 
 h2 > a {
   color: inherit;
   text-decoration: none; }
+
+.img-resposive {
+  display: block;
+  width: 100%;
+  max-width: 100%; }
+
+.content-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+  .content-container .col-6 {
+    flex-basis: 50%; }
+
+.align-left {
+  text-align: left; }
+
+.about {
+  padding-top: 50px !important; }
+
+.cool_glasses {
+  top: 0;
+  left: 11.5%;
+  position: absolute;
+  width: 202px;
+  opacity: 0;
+  transition: top 5s ease, opacity 5s ease; }
+  .slides .present .cool_glasses {
+    top: 45%;
+    opacity: 1; }
 
 .special-links {
   position: relative;
@@ -1962,6 +1999,21 @@ h2 > a {
   .slides .present .heart {
     animation: heart-animation 1s ease infinite;
     top: 250px; }
+
+.circle {
+  display: block;
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  border-radius: 50%;
+  border: 5px solid #0078D7 !important; }
+  .circle span {
+    position: absolute; }
+  .circle.circle-CSS {
+    left: 320px; }
+    .circle.circle-CSS span {
+      top: 30px;
+      left: 129px; }
 
 @keyframes heart-animation {
   0%, 100% {

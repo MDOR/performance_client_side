@@ -2,6 +2,7 @@
 $paradiso: #3c948b;
 $mine-shaft: #343434;
 $dixie: #E1991C;
+$lochmara: #0078D7;
 
 /* Times */
 $short-time: .5s;
@@ -15,9 +16,20 @@ body {
   color: white;
 }
 
+* {
+  font-family: 'Roboto', Helvetica;
+}
+
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Roboto';
   color: $paradiso;
+}
+
+h1 {
+  font-size: 67px !important;
+}
+
+h2 {
+  font-size: 60px !important;
 }
 
 blockquote {
@@ -29,14 +41,53 @@ blockquote {
   border-left: 3px solid $dixie !important;
 }
 
-p {
-  font-size: 35px !important;
+div, p {
+  font-size: 26px !important;
 }
 
 h2 > a {
   color: inherit;
   text-decoration: none;
 }
+
+.img-resposive {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .col-6 {
+    flex-basis: 50%;
+  }
+}
+
+
+.align-left {
+  text-align: left;
+}
+
+.about {
+  padding-top: 50px !important;
+}
+
+.cool_glasses {
+  top: 0;
+  left: 11.5%;
+  position: absolute;
+  width: 202px;
+  opacity: 0;
+  transition: top 5s ease, opacity 5s ease;
+  .slides .present & {
+    top: 45%;
+    opacity: 1;
+  }
+}
+
 
 .special-links {
   position: relative;
@@ -50,7 +101,7 @@ h2 > a {
     width: 0;
     position: absolute;
     transition: $default-time width ease,  $default-time background ease;
-    bottom: -1px; 
+    bottom: -1px;
     background: $dixie;
     z-index: -1;
   }
@@ -115,7 +166,23 @@ h2 > a {
 
 
 .circle {
+  display: block;
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  border-radius: 50%;
+  border: 5px solid $lochmara !important;
 
+  span {
+    position: absolute;
+  }
+  &.circle-CSS {
+    left: 320px;
+    span {
+      top: 30px;
+      left: 129px;
+    }
+  }
 }
 
 
