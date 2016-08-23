@@ -2,11 +2,18 @@
 $paradiso: #3c948b;
 $mine-shaft: #343434;
 $dixie: #E1991C;
+$royal-blue: #3b78e7;
+$cornflower-blue: #EEE;
 $lochmara: #0078D7;
+$alizarin-crimson: #ED3130;
 
 /* Times */
 $short-time: .5s;
 $default-time: 1s;
+
+/* Border */
+$common-border: 10px;
+
 
 html,
 body {
@@ -16,9 +23,24 @@ body {
   color: white;
 }
 
-* {
-  font-family: 'Roboto', Helvetica;
+*:not(.fa) {
+  font-family: 'Roboto', Helvetica !important;
 }
+
+.fa {
+  font-family:'FontAwesome' !important;
+  font-style: normal !important;
+  &:before {
+    font-size: 72px;
+    line-height: 75px;
+  }
+}
+ .files-concat {
+   .fa:last-child {
+     color: green;
+   }
+ }
+
 
 h1, h2, h3, h4, h5, h6 {
   color: $paradiso;
@@ -43,6 +65,32 @@ blockquote {
 
 div, p {
   font-size: 26px !important;
+}
+p, ul, dl, ol {
+  text-align: left;
+}
+
+ul, ol, dl {
+  display: block !important;
+  li {
+    list-style: none;
+    position: relative;
+    &:before {
+      content: ' ';
+      border-radius: 50%;
+      display: block;
+      height: 6px;
+      width: 6px;
+      position: absolute;
+      background: $dixie;
+      top: 11px;
+      left: -15px
+    }
+  }
+}
+
+dt {
+  color: $lochmara;
 }
 
 h2 > a {
@@ -138,8 +186,9 @@ h2 > a {
   height: 30px;
   width: 30px;
   position: relative;
-  top: 0;
+  top: 250px;
   background-color: red;
+  animation: heart-animation 1s ease infinite;
   &:after,
   &:before {
     content: ' ';
@@ -158,12 +207,7 @@ h2 > a {
   &:after {
     left: 14px;
   }
-  .slides .present & {
-    animation: heart-animation 1s ease infinite;
-    top: 250px;
-  }
 }
-
 
 .circle {
   display: block;
@@ -174,7 +218,9 @@ h2 > a {
   border: 5px solid $lochmara !important;
 
   span {
+    font-weight: bold;
     position: absolute;
+    color: $dixie;
   }
   &.circle-CSS {
     left: 320px;
@@ -185,12 +231,37 @@ h2 > a {
   }
 }
 
-
 @keyframes heart-animation {
   0%, 100% {
-    transform: scale(1) rotate(-45deg);
-  }
-  50% {
     transform: scale(1.2) rotate(-45deg);
+  }
+
+  50% {
+    transform: scale(1.5) rotate(-45deg);
+  }
+}
+
+/*Pretty Print*/
+.prettyprint {
+  border-radius: $common-border;
+  border-left:  5px solid $royal-blue !important;
+  padding: 15px 10px !important;
+  background-color: $cornflower-blue;
+  overflow-x: auto;
+
+  span {
+    font-size: 18px;
+  }
+
+  .kwd, .tag {
+    color: $alizarin-crimson;
+  }
+
+  .pln, .atn {
+    color: $paradiso;
+  }
+
+  .pun, .opn, .clo, .atv {
+    color: $royal-blue;
   }
 }

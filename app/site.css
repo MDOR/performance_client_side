@@ -1881,6 +1881,7 @@ body {
 
 /* Colors */
 /* Times */
+/* Border */
 html,
 body {
   min-width: 500px;
@@ -1888,8 +1889,18 @@ body {
   background-color: #343434;
   color: white; }
 
-* {
-  font-family: 'Roboto', Helvetica; }
+*:not(.fa) {
+  font-family: 'Roboto', Helvetica !important; }
+
+.fa {
+  font-family: 'FontAwesome' !important;
+  font-style: normal !important; }
+  .fa:before {
+    font-size: 72px;
+    line-height: 75px; }
+
+.files-concat .fa:last-child {
+  color: green; }
 
 h1, h2, h3, h4, h5, h6 {
   color: #3c948b; }
@@ -1910,6 +1921,28 @@ blockquote {
 
 div, p {
   font-size: 26px !important; }
+
+p, ul, dl, ol {
+  text-align: left; }
+
+ul, ol, dl {
+  display: block !important; }
+  ul li, ol li, dl li {
+    list-style: none;
+    position: relative; }
+    ul li:before, ol li:before, dl li:before {
+      content: ' ';
+      border-radius: 50%;
+      display: block;
+      height: 6px;
+      width: 6px;
+      position: absolute;
+      background: #E1991C;
+      top: 11px;
+      left: -15px; }
+
+dt {
+  color: #0078D7; }
 
 h2 > a {
   color: inherit;
@@ -1980,8 +2013,9 @@ h2 > a {
   height: 30px;
   width: 30px;
   position: relative;
-  top: 0;
-  background-color: red; }
+  top: 250px;
+  background-color: red;
+  animation: heart-animation 1s ease infinite; }
   .heart:after, .heart:before {
     content: ' ';
     border-radius: 50%;
@@ -1996,9 +2030,6 @@ h2 > a {
     top: -14px; }
   .heart:after {
     left: 14px; }
-  .slides .present .heart {
-    animation: heart-animation 1s ease infinite;
-    top: 250px; }
 
 .circle {
   display: block;
@@ -2008,7 +2039,9 @@ h2 > a {
   border-radius: 50%;
   border: 5px solid #0078D7 !important; }
   .circle span {
-    position: absolute; }
+    font-weight: bold;
+    position: absolute;
+    color: #E1991C; }
   .circle.circle-CSS {
     left: 320px; }
     .circle.circle-CSS span {
@@ -2017,6 +2050,22 @@ h2 > a {
 
 @keyframes heart-animation {
   0%, 100% {
-    transform: scale(1) rotate(-45deg); }
+    transform: scale(1.2) rotate(-45deg); }
   50% {
-    transform: scale(1.2) rotate(-45deg); } }
+    transform: scale(1.5) rotate(-45deg); } }
+
+/*Pretty Print*/
+.prettyprint {
+  border-radius: 10px;
+  border-left: 5px solid #3b78e7 !important;
+  padding: 15px 10px !important;
+  background-color: #EEE;
+  overflow-x: auto; }
+  .prettyprint span {
+    font-size: 18px; }
+  .prettyprint .kwd, .prettyprint .tag {
+    color: #ED3130; }
+  .prettyprint .pln, .prettyprint .atn {
+    color: #3c948b; }
+  .prettyprint .pun, .prettyprint .opn, .prettyprint .clo, .prettyprint .atv {
+    color: #3b78e7; }
