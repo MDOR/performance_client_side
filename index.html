@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta charset="UTF-8">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+      <link rel="stylesheet" href="app/site.css">
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section class="first-slide">
+                  <h1>Client Side Performance</h1>
+                  <h2>By <a href="https://mx.linkedin.com/in/marco-antonio-dominguez-rueda-a3a974aa" target="_blank" class="special-links">Marco Antonio Dominguez</a></h2>
+                </section>
+                <section>
+                  <blockquote cite="http://designingforperformance.com/performance-is-ux/">
+                      <header>
+                        <hgroup>
+                          <h1>Performance is User Experience</h1>
+                          <h2>- Designing for Performance</h2>
+                        </hgroup>
+                      </header>
+                      <p>Users expects the page to load in <strong>2 seconds</strong>, after <strong>3 seconds</strong>, up to 40% of users will abandon your site.</p>
+                      <p>Your site's experience determines how much your audience trust your brand, return your site and share it with others.</p>
+                  </blockquote>
+                </section>
+                <section>
+                    <div class="heart-container">
+                        <div class="circle circle-CSS">
+                            <span>CSS</span>
+                        </div>
+                        <span class="heart"></span>
+                    </div>
+                </section>
+                <section>
+                  <h1>CSS</h1>
+                  <p>CSS can produce a delay when the page is loading.</p>
+                  <p>The browser will show content until the <strong>CSSOM</strong> (CSS Object Model) is ready.</p>
+                  <p>CSSOM is basically a map of the CSS on the site, it contains inline styles and external resources.</p>
+                  <p>CSSOM and DOM are combined and used to display pages by the browsers.</p>
+                  <p>CSSOM is blocked by JavaScript.</p>
+                  <p>The browser works unsing intervals of 16.66ms.</p>
+                </section>
+                <section>
+                  <h2>CSS Labels</h2>
+                  <p>
+                    Is possible to add media queries to manage the style to load in the page, for that reason we need to know if we have properly labels for our CSS files.
+                  </p>
+                  <p>
+                    This method avoid load unnecessary code in the application and reduce the file's size.
+                  </p>
+<pre class="prettyprint lang-html">
+/*Syntax*/
+&#60link rel="stylesheet" media="mediatype and|not|only (expressions)" href="path_to_file/file.css"&#62
+
+/*Best Practices*/
+&#60link rel="stylesheet" href="common_styles.css"&#62
+&#60link rel="stylesheet" href="print_styles.css" media="print"&#62
+&#60link rel="stylesheet" href="portrait.css" media="orientation:portrait"&#62
+&#60link rel="stylesheet" href="min_resolution.css" media="(min-width: 40em)"&#62
+</pre>
+                </section>
+                <section>
+                  <h2>Concat CSS files</h2>
+                  <p>If the application will load external files, the HTTP request will increase the rendering time for this reason you should combine them in a single file in order to avoid a lot of HTTP requests.</p>
+                  <p>They need to be ordered based on it's own precedence.</p>
+                  <div class="files-concat">
+                    <i class="fa fa-file-code-o" aria-hidden="true"></i> + <i class="fa fa-file-code-o" aria-hidden="true"></i> + <i class="fa fa-file-code-o" aria-hidden="true"></i> = <i class="fa fa-file-code-o" aria-hidden="true"></i>
+                  </div>
+                </section>
+                <section>
+                  <h2>CSS Pipelines</h2>
+                  <p>The main areas to understand the CSS pipelines are:</p>
+                  <ul>
+                    <li>JavaScript (JS)</li>
+                    <li>Style (CSS)</li>
+                    <li>Layout</li>
+                    <li>Paint</li>
+                    <li>Composite</li>
+                  </ul>
+                  <p>Each one can be a blocker for rendering, these properties don't depend each other all the time.</p>
+                </section>
+                <section>
+                  <h2>CSS Flows</h2>
+                  <dl>
+                    <dt>JS/CSS -> Style -> Layout -> Paint -> Composite</dt>
+                    <dd>If the change modify the size or position, the browsers will check all the other elments for changes. The affected section into the page will be repainted and composite will be executed.</dd>
+
+                    <dt>JS/CSS -> Style -> Paint -> Composite</dt>
+                    <dd>If the change modify the color, background, shadow, etc. the element will be repainted.</dd>
+
+                    <dt>JS/CSS -> Style ->  Composite</dt>
+                    <dd>If the change modify layer position the element will be repainted.</dd>
+                  </dl>
+                </section>
+                <section>
+                  <h2>CSS execution</h2>
+                  <p>For each DOM modification (add or remove elements, add attributes, classes, animations) the browser will recalculate element styles in many cases specific section or the entire page (reflow).</p>
+
+                  <h3>Recomendations</h3>
+                  <p>We should reduce the changes into the DOM elements.</p>
+                  <p>Avoid repaintings cycles longer than 16ms.</p>
+                  <p>Use transform and opacity for animations.</p>
+                  <p>Use will-change property if needed.</p>
+                  <p>Use <bold>requestAnimationFrame</strong>.</p>
+                  <p>Use flexbox instead other models.</p>
+                </section>
+                <section>
+                  <h2>Using Atomic Modeling</h2>
+                  <p>Consistent Desing</p>
+                  <p>Fast</p>
+
+                  <h3>Principles</h3>
+                  <p>Separate Structure and Skin</p>
+                  <p>Separate Content and Container</p>
+                  <p>Minimize Selectors</p>
+
+                </section>
+                <section>
+                  <h2>Composing Components</h2>
+                  <p>The components clasification:</p>
+                  <dl>
+                    <dt>Atoms</dt>
+                    <dd>The basic building blocks, basically our HTML tags. Examples: a, p, div, h1, navigation bar, etc.</dd>
+                    <dt>Molecules</dt>
+                    <dd>Combination of our different atoms in order to create elements, individually atoms aren't useful by themselves, combined they can respresent and doi something. Exaples: Search, Dropdowns, etc.</dd>
+                    <dt>Organisms</dt>
+                    <dd>Combination of different molecules, the reslut is block of content of the site. Examples: Header, Footer, etc.</dd>
+                    <dt>Templates</dt>
+                    <dd>At this moment the combination makes sense into design perspective, because we grouped different organisms to build a layout.</dd>
+                  </dl>
+                </section>
+                <section>
+                  <h3>Steps</h3>
+                  <p>Find common modules into the page, like list, buttons, anchors, headings, etc. and find the common patterns into your site.</p>
+                  <p>Check the component's states and variations.</p>
+                  <p>Use the proper elments for your components.</p>
+                  <p>Avoid specification.</p>
+                  <h4>Example</h4>
+                  <div class="example">
+                    Good
+                    <br>
+                    <button href="javascript: void(0)" class="button blue">Test button</button>
+                    <button href="javascript: void(0)" class="button orange">Test button</button>
+                    <br>
+                    <a href="javascript: void(0)" class="button blue">Test button</a>
+                    <a href="javascript: void(0)" class="button orange">Test button</a>
+                    <br>
+                    Bad
+                    <br>
+                    <p class="button blue">Test Button</p>
+                    <p class="button orange">Test Button</p>
+                    <a href="javascript: void(0)" class="button-for-header blue">Test button</a>
+                  </div>
+                </section>
+                <section>
+                  <h4>Code Example</h4>
+
+<pre class="prettyprint">
+Good
+.button {
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: blue;
+  cursor: pointer;
+}
+.button.blue {
+  border-color: #3b78e7;
+  background: #3b78e7;
+  color: white;
+}
+.button.blue:hover {
+    background: #1549a7;
+}
+.button.orange {
+  border-color: #E1991C;
+  background: #E1991C;
+  color: white;
+}
+.button.orange:hover {
+    background: #865b11;
+}
+
+Bad
+.button {
+  border: 1px solid black;
+  background: red;
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: blue;
+  cursor: pointer;
+}
+.button.blue {
+  border-color: #3b78e7;
+  background: #3b78e7;
+  color: white;
+}
+.button.blue:hover {
+    background: #1549a7;
+}
+.button.orange {
+  border-color: #E1991C;
+  background: #E1991C;
+  color: white;
+}
+.button.orange:hover {
+  background: #865b11;
+}
+
+/*..More Code..*/
+a.button-for-header {
+  border: 1px solid black;
+  background: white;
+  font-size: 15px;
+  padding: 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: blue;
+  cursor: pointer;
+}
+a.button-for-header.blue {
+  border-color: #3b78e7;
+  background: #3b78e7;
+  color: white;
+}
+a.button-for-header.blue:hover {
+  background: #865b11;
+}
+
+</pre>
+                </section>
+                <section>
+                    <div class="heart-container">
+                        <div class="circle circle-CSS">
+                            <span>CSS</span>
+                        </div>
+                        <div class="circle circle-JS">
+                            <span>JS</span>
+                        </div>
+                        <span class="heart"></span>
+                    </div>
+                </section>
+                <section style="position: relative">
+                  <h1>About</h1>
+                  <div class="content-container">
+                      <div class="col-6">
+                        <img src="app/img/cool_glasses.png" alt="" class="cool_glasses"/>
+                        <img src="app/img/cartoon_profile.png" alt="" class="img-resposive"/>
+                      </div>
+                      <div class="col-6 align-left about">
+                        <p>Marco Antonio Domínguez is a Computer System Engineer, JavaScript Lover and Web Developer.</p>
+                        <ul>
+                          <li><a href="https://mx.linkedin.com/in/marco-antonio-dominguez-rueda-a3a974aa" target="_blank" class="special-links">Linkedin</a></li>
+                          <li><a href="https://github.com/MDOR" target="_blank" class="special-links">GitHub</a></li>                        </ul>
+                      </div>
+                  </div>
+                </section>
+            </div>
+        </div>
+        <script src="app/site.js" async></script>
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js" async></script>
+    </body>
+</html>
