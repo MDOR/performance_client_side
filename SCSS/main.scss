@@ -187,6 +187,8 @@ a {
   display: block;
   height: 500px;
   width: 100%;
+  text-align: center;
+  position: relative;
   min-width: 500px;
 }
 
@@ -195,6 +197,7 @@ a {
   height: 30px;
   width: 30px;
   position: relative;
+  margin-left: -17px !important;
   top: 250px;
   background-color: red;
   animation: heart-animation 1s ease infinite;
