@@ -4,14 +4,28 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta charset="UTF-8">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
       <link rel="stylesheet" href="app/site.css">
     <body>
         <div class="reveal">
             <div class="slides">
                 <section class="first-slide">
                   <h1>Client Side Performance</h1>
-                  <h2>By <a href="https://mx.linkedin.com/in/marco-antonio-dominguez-rueda-a3a974aa" target="_blank" class="special-links">Marco Antonio Dominguez</a></h2>
+                  <h2>By <a href="https://mx.linkedin.com/in/marco-antonio-dominguez-rueda-a3a974aa" target="_blank" class="special-links">Marco Antonio Domínguez</a></h2>
+                </section>
+                <section style="position: relative">
+                  <h1>About</h1>
+                  <div class="content-container">
+                      <div class="col-6">
+                        <img src="app/img/cool_glasses.png" alt="" class="cool_glasses"/>
+                        <img src="app/img/cartoon_profile.png" alt="" class="img-resposive"/>
+                      </div>
+                      <div class="col-6 align-left about">
+                        <p>Marco Antonio Domínguez is a Computer System Engineer, JavaScript Lover and Web Developer.</p>
+                        <ul>
+                          <li><a href="https://mx.linkedin.com/in/marco-antonio-dominguez-rueda-a3a974aa" target="_blank" class="special-links">Linkedin</a></li>
+                          <li><a href="https://github.com/MDOR" target="_blank" class="special-links">GitHub</a></li>                        </ul>
+                      </div>
+                  </div>
                 </section>
                 <section>
                   <blockquote cite="http://designingforperformance.com/performance-is-ux/">
@@ -26,6 +40,24 @@
                   </blockquote>
                 </section>
                 <section>
+                  <h2>Talking about human perception</h2>
+                  <div class="content-container">
+                    <div class="wait col-4 green">0 - 100ms</div>
+                    <div class="wait col-4 blue">300ms - 1s</div>
+                    <div class="wait col-4 red">1s +</div>
+                    <div class="wait col-4">
+                      <img src="app/img/waiting.jpg" class="img-resposive"/>
+                    </div>
+                  </div>
+                </section>
+                <section>
+                    <h1>Performance</h1>
+                    <div class="heart-container">
+                        <span class="heart"></span>
+                    </div>
+                </section>
+                <section>
+                    <h1>Performance</h1>
                     <div class="heart-container">
                         <div class="circle circle-CSS">
                             <span>CSS</span>
@@ -35,21 +67,19 @@
                 </section>
                 <section>
                   <h1>CSS</h1>
-                  <p>CSS can produce a delay when the page is loading.</p>
-                  <p>The browser will show content until the <strong>CSSOM</strong> (CSS Object Model) is ready.</p>
-                  <p>CSSOM is basically a map of the CSS on the site, it contains inline styles and external resources.</p>
-                  <p>CSSOM and DOM are combined and used to display pages by the browsers.</p>
+                  <p><strong>CSSOM (CSS Object Model) </strong> is basically a map of the CSS on the site.</p>
+                  <p>The browser doesn't show content until the <strong>CSSOM</strong> is ready.</p>
+                  <p>CSSOM and DOM are combined.</p>
                   <p>CSSOM is blocked by JavaScript.</p>
                   <p>The browser works unsing intervals of 16.66ms.</p>
                 </section>
                 <section>
                   <h2>CSS Labels</h2>
-                  <p>
-                    Is possible to add media queries to manage the style to load in the page, for that reason we need to know if we have properly labels for our CSS files.
-                  </p>
-                  <p>
-                    This method avoid load unnecessary code in the application and reduce the file's size.
-                  </p>
+                  <p>We can add labelss to manage the styles in the page.</p>
+                  <p>Labels avoid load unnecessary code in the application.</p>
+                </section>
+                <section>
+                  <h2>Example</h2>
 <pre class="prettyprint lang-html">
 /*Syntax*/
 &#60link rel="stylesheet" media="mediatype and|not|only (expressions)" href="path_to_file/file.css"&#62
@@ -63,15 +93,14 @@
                 </section>
                 <section>
                   <h2>Concat CSS files</h2>
-                  <p>If the application will load external files, the HTTP request will increase the rendering time for this reason you should combine them in a single file in order to avoid a lot of HTTP requests.</p>
-                  <p>They need to be ordered based on it's own precedence.</p>
+                  <p>Http request are expensive and increase rendering time.</p>
+                  <p>Order files based on it's own precedence.</p>
                   <div class="files-concat">
-                    <i class="fa fa-file-code-o" aria-hidden="true"></i> + <i class="fa fa-file-code-o" aria-hidden="true"></i> + <i class="fa fa-file-code-o" aria-hidden="true"></i> = <i class="fa fa-file-code-o" aria-hidden="true"></i>
+                    <span>📄</span> + <span>📄</span> + <span>📄</span> = <span>📄</span>
                   </div>
                 </section>
                 <section>
                   <h2>CSS Pipelines</h2>
-                  <p>The main areas to understand the CSS pipelines are:</p>
                   <ul>
                     <li>JavaScript (JS)</li>
                     <li>Style (CSS)</li>
@@ -79,65 +108,88 @@
                     <li>Paint</li>
                     <li>Composite</li>
                   </ul>
-                  <p>Each one can be a blocker for rendering, these properties don't depend each other all the time.</p>
                 </section>
                 <section>
                   <h2>CSS Flows</h2>
-                  <dl>
-                    <dt>JS/CSS -> Style -> Layout -> Paint -> Composite</dt>
-                    <dd>If the change modify the size or position, the browsers will check all the other elments for changes. The affected section into the page will be repainted and composite will be executed.</dd>
-
-                    <dt>JS/CSS -> Style -> Paint -> Composite</dt>
-                    <dd>If the change modify the color, background, shadow, etc. the element will be repainted.</dd>
-
-                    <dt>JS/CSS -> Style ->  Composite</dt>
-                    <dd>If the change modify layer position the element will be repainted.</dd>
-                  </dl>
+                  <ul>
+                    <li>JS/CSS -> Style -> Layout -> Paint -> Composite</li>
+                    <li>JS/CSS -> Style -> Paint -> Composite</li>
+                    <li>JS/CSS -> Style ->  Composite</li>
+                  </ul>
+                </section>
+                <section>
+                  <h3>JS/CSS -> Style -> Layout -> Paint -> Composite</h3>
+                  <p>Change related with size or position.</p>
+                  <p>Browsers check all elements for changes.</p>
+                  <p>Affected sections will be repainted and composite will be executed.</p>
+                </section>
+                <section>
+                  <h3>JS/CSS -> Style -> Paint -> Composite</h3>
+                  <p>Change related with color, background, shadow, etc.</p>
+                  <p>Element will be repainted</p>
+                </section>
+                <section>
+                  <h3>JS/CSS -> Style -> Composite</h3>
+                  <p>Change related with layer composition.</p>
+                  <p>Composite will be executed.</p>
                 </section>
                 <section>
                   <h2>CSS execution</h2>
-                  <p>For each DOM modification (add or remove elements, add attributes, classes, animations) the browser will recalculate element styles in many cases specific section or the entire page (reflow).</p>
-
+                  <p>DOM modifications fire element styles recalculations, in many cases specific section or the entire page (reflow).</p>
+                </section>
+                <section>
                   <h3>Recomendations</h3>
-                  <p>We should reduce the changes into the DOM elements.</p>
+                  <p>Reduce changes in the DOM tree.</p>
                   <p>Avoid repaintings cycles longer than 16ms.</p>
-                  <p>Use transform and opacity for animations.</p>
                   <p>Use will-change property if needed.</p>
+                  <p>Use transform and opacity for animations.</p>
                   <p>Use <bold>requestAnimationFrame</strong>.</p>
                   <p>Use flexbox instead other models.</p>
                 </section>
                 <section>
-                  <h2>Using Atomic Modeling</h2>
-                  <p>Consistent Desing</p>
-                  <p>Fast</p>
-
-                  <h3>Principles</h3>
-                  <p>Separate Structure and Skin</p>
-                  <p>Separate Content and Container</p>
-                  <p>Minimize Selectors</p>
-
+                  <h1>Using Atomic Modeling</h1>
+                  <ul>
+                    <li>Consistent Desing</li>
+                    <li>Fast</li>
+                    <li>Separate Structure and Skin</li>
+                    <li>Separate Content and Container</li>
+                    <li>Minimize Selectors</li>
+                  </ul>
                 </section>
                 <section>
-                  <h2>Composing Components</h2>
-                  <p>The components clasification:</p>
-                  <dl>
-                    <dt>Atoms</dt>
-                    <dd>The basic building blocks, basically our HTML tags. Examples: a, p, div, h1, navigation bar, etc.</dd>
-                    <dt>Molecules</dt>
-                    <dd>Combination of our different atoms in order to create elements, individually atoms aren't useful by themselves, combined they can respresent and doi something. Exaples: Search, Dropdowns, etc.</dd>
-                    <dt>Organisms</dt>
-                    <dd>Combination of different molecules, the reslut is block of content of the site. Examples: Header, Footer, etc.</dd>
-                    <dt>Templates</dt>
-                    <dd>At this moment the combination makes sense into design perspective, because we grouped different organisms to build a layout.</dd>
-                  </dl>
+                  <h2>Components Clasification</h2>
+                  <ul>
+                    <li>Atom</li>
+                    <li>Molecules</li>
+                    <li>Organisms</li>
+                    <li>Templates</li>
+                  </ul>
                 </section>
                 <section>
-                  <h3>Steps</h3>
-                  <p>Find common modules into the page, like list, buttons, anchors, headings, etc. and find the common patterns into your site.</p>
-                  <p>Check the component's states and variations.</p>
+                  <h3>Atoms</h3>
+                  <p>Basic building blocks, basically our HTML tags. Examples: a, p, div, h1, navigation bar, etc.</p>
+                </section>
+                <section>
+                  <h3>Molecules</h3>
+                  <p>Combination of our different atoms in order to create elements, individually atoms aren't useful by themselves, combined they can respresent and doi something. Exaples: Search, Dropdowns, etc.</p>
+                </section>
+                <section>
+                  <h3>Organisms</h3>
+                  <p>Combination of different molecules, the result is block of content of the site. Examples: Header, Footer, etc.</p>
+                </section>
+                <section>
+                  <h3>Templates</h3>
+                  <p>At this moment the combination makes sense into design perspective, because we grouped different organisms to build a layout.</p>
+                </section>
+                <section>
+                  <h3>Recomendations</h3>
+                  <p>Find elements into the page, like list, buttons, anchors, headings, etc. and common patterns into your site.</p>
+                  <p>Check states and variations for each component.</p>
                   <p>Use the proper elments for your components.</p>
                   <p>Avoid specification.</p>
-                  <h4>Example</h4>
+                </section>
+                <section>
+                  <h3>Example</h3>
                   <div class="example">
                     Good
                     <br>
@@ -156,109 +208,233 @@
                 </section>
                 <section>
                   <h4>Code Example</h4>
-
-<pre class="prettyprint">
-Good
-.button {
-  border: 1px solid black;
-  padding: 5px;
-  border-radius: 5px;
-  text-decoration: none;
-  color: blue;
-  cursor: pointer;
-}
-.button.blue {
-  border-color: #3b78e7;
-  background: #3b78e7;
-  color: white;
-}
-.button.blue:hover {
-    background: #1549a7;
-}
-.button.orange {
-  border-color: #E1991C;
-  background: #E1991C;
-  color: white;
-}
-.button.orange:hover {
+                  <div class="content-container">
+                      <div class="col-6">
+                        Good
+  <pre class="prettyprint">
+    .button {
+      border: 1px solid black;
+      padding: 5px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: blue;
+      cursor: pointer;
+    }
+    .button.blue {
+      border-color: #3b78e7;
+      background: #3b78e7;
+      color: white;
+    }
+    .button.blue:hover {
+        background: #1549a7;
+    }
+    .button.orange {
+      border-color: #E1991C;
+      background: #E1991C;
+      color: white;
+    }
+    .button.orange:hover {
+        background: #865b11;
+    }
+  </pre>
+                      </div>
+                      <div class="col-6">
+                        Bad
+  <pre class="prettyprint">
+  .button {
+    border: 1px solid black;
+    background: red;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: blue;
+    cursor: pointer;
+  }
+  .button.blue {
+    border-color: #3b78e7;
+    background: #3b78e7;
+    color: white;
+  }
+  .button.blue:hover {
+      background: #1549a7;
+  }
+  .button.orange {
+    border-color: #E1991C;
+    background: #E1991C;
+    color: white;
+  }
+  .button.orange:hover {
     background: #865b11;
-}
+  }
 
-Bad
-.button {
-  border: 1px solid black;
-  background: red;
-  font-size: 20px;
-  padding: 5px;
-  border-radius: 5px;
-  text-decoration: none;
-  color: blue;
-  cursor: pointer;
-}
-.button.blue {
-  border-color: #3b78e7;
-  background: #3b78e7;
-  color: white;
-}
-.button.blue:hover {
-    background: #1549a7;
-}
-.button.orange {
-  border-color: #E1991C;
-  background: #E1991C;
-  color: white;
-}
-.button.orange:hover {
-  background: #865b11;
-}
+  /*..More Code..*/
+  a.button-for-header {
+    border: 1px solid black;
+    background: white;
+    font-size: 15px;
+    padding: 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: blue;
+    cursor: pointer;
+  }
+  a.button-for-header.blue {
+    border-color: #3b78e7;
+    background: #3b78e7;
+    color: white;
+  }
+  a.button-for-header.blue:hover {
+    background: #865b11;
+  }
+  </pre>
+                      </div>
 
-/*..More Code..*/
-a.button-for-header {
-  border: 1px solid black;
-  background: white;
-  font-size: 15px;
-  padding: 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  color: blue;
-  cursor: pointer;
-}
-a.button-for-header.blue {
-  border-color: #3b78e7;
-  background: #3b78e7;
-  color: white;
-}
-a.button-for-header.blue:hover {
-  background: #865b11;
-}
+                </section>
+                <section>
+                  <h1>Performance</h1>
+                  <div class="heart-container">
+                    <div class="circle circle-CSS">
+                      <span>CSS</span>
+                    </div>
+                    <div class="circle circle-JS">
+                        <span>JS</span>
+                    </div>
+                    <span class="heart"></span>
+                  </div>
+                </section>
+                <section>
+                  <h2>Talking about memory management</h2>
+                  <p>All the browsers have its own <strong>Garbage Collector</strong> to remove unnecessary references.</p>
+                  <p>When referenced variables aren't used anymore they are removed.</p>
+                </section>
+                <section>
+                  <ul>
+                    <li>Avoid namespaces or global variables as you can, they are cleaned just when the user refresh or leave the page</li>
+                    <li>Keep local variables as you can.</li>
+                    <li>Unbind handlers.</li>
+                    <li>Clean storage.</li>
+                  </ul>
+                </section>
+                <section>
+                  <h2>Functions</h2>
+                  <pre class="prettyprint">
+                    //Good
+                    function exec () {
+                      var args = arguments,
+                          temp = 0;
+
+                      for (var i = args.length - 1; i >= 0; i -= 1) {
+                        temp += ~~args[i];
+                      }
+
+                      console.log("Total: %c" + temp, "color: red");
+                    }
+
+                    //Bad
+                    function exec () {
+                      var args = arguments,
+                          temp = 0;
+
+                      for (var i = args.length - 1; i >= 0; i -= 1) {
+                        temp += ~~args[i];
+                      }
+
+                      return temp;
+                    }
+
+                    var result = exec(1, 2, 3, 4);
+                  </pre>
+                </section>
+                <section>
+                  <h2>Timers</h2>
+<pre class="prettyprint">
+/*Bad*/
+var obj = {
+            print: setInterval(function () {
+              console.log("Nasty Code %c I'm not accessible 🌋", "color: red;"),
+            }, 1000)
+          };
+
+obj.print;
+
+obj.print = null;
+
+/*Good*/
+var obj = {
+            print: setInterval(function () {
+              console.log("Nasty Code %c 🌋", "color: red;")
+            }, 1000),
+            clean: function () {
+              console.log("I'm cleaning, print is accessible for GC");
+              clearInterval(this.print);
+            }
+          };
+
+obj.print;
+obj.clean();
 
 </pre>
                 </section>
                 <section>
-                    <div class="heart-container">
-                        <div class="circle circle-CSS">
-                            <span>CSS</span>
-                        </div>
-                        <div class="circle circle-JS">
-                            <span>JS</span>
-                        </div>
-                        <span class="heart"></span>
-                    </div>
+                  <h2>Circular references</h2>
+<pre class="prettyprint">
+  var elementActive = document.getElementById('active-div');
+
+  elementActive.innerElements = elementActive;
+  /*Adding More Code to elementActive*/
+</pre>
                 </section>
-                <section style="position: relative">
-                  <h1>About</h1>
-                  <div class="content-container">
-                      <div class="col-6">
-                        <img src="app/img/cool_glasses.png" alt="" class="cool_glasses"/>
-                        <img src="app/img/cartoon_profile.png" alt="" class="img-resposive"/>
-                      </div>
-                      <div class="col-6 align-left about">
-                        <p>Marco Antonio Domínguez is a Computer System Engineer, JavaScript Lover and Web Developer.</p>
-                        <ul>
-                          <li><a href="https://mx.linkedin.com/in/marco-antonio-dominguez-rueda-a3a974aa" target="_blank" class="special-links">Linkedin</a></li>
-                          <li><a href="https://github.com/MDOR" target="_blank" class="special-links">GitHub</a></li>                        </ul>
-                      </div>
+                <section>
+                  <h1>Performance</h1>
+                  <div class="heart-container">
+                    <div class="circle circle-CSS">
+                      <span>CSS</span>
+                    </div>
+                    <div class="circle circle-JS">
+                        <span>JS</span>
+                    </div>
+                    <div class="circle General">
+                        <span>Gen</span>
+                    </div>
+                    <span class="heart"></span>
                   </div>
+                </section>
+                <section>
+                  <h1>The Web</h1>
+                  <img src="app/img/fat_dog.jpg" alt="" class="img-resposive"/>
+                </section>
+                <section>
+                  <h1>Example Optimization</h1>
+                  <ul>
+                    <li>Site: <a href="maquinas_label_example/maquinas_base/index.html" target="_blank">Maquinas Label</a></li>
+                    <li>Average Time: 1.3s</li>
+                    <li>Total Size: 3.6MB</li>
+                    <li>No minification</li>
+                  </ul>
+                </section>
+                <section>
+                  <h2>First Steps</h2>
+                  <p>Remove unecessary dependencies, in this example we can remove jQuery</p>
+                  <p>Normalize CSS and jQuery are not needed, instead we can move the JS below</p>
+
+                  <p>Result:
+                    <ul>
+                      <li>Site: <a href="maquinas_label_example/example_1/index.html" target="_blank">Maquinas Label</a></li>
+                      <li>Average Time: 1s</li>
+                      <li>Total Size: 3MB</li>
+                      <li>No minification</li>
+                    </ul>
+                  </p>
+                </section>
+                <section>
+                  <h2>Task Runners</h2>
+                  <div class="content-container">
+
+                  </div>
+                </section>
+                <section>
+                  Questions?
                 </section>
             </div>
         </div>

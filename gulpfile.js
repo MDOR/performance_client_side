@@ -1,4 +1,5 @@
 var gulp        = require('gulp'),
+    babelify    = require('babelify'),
     sass        = require('gulp-sass'),
     concat      = require('gulp-concat'),
     browserify  = require('gulp-browserify'),
@@ -43,5 +44,19 @@ gulp.task('watch', function () {
   gulp.watch('./JS/*.js', ['browserify']);
   gulp.watch('./*.html', ['html']);
 });
+
+/*Example 1*/
+gulp.task('example1_JS', function() {
+    // Single entry point to browserify
+    gulp.src('maquinas_label_example/maquinas_base/app/maquinas.js')
+        .pipe(
+          browserify({
+            insertGlobals : true,
+          })
+          .transform("babelify", {presets: ["es2015", "react"]})
+        )
+        .pipe(gulp.dest('maquinas_label_example/example_1'))
+});
+
 
 gulp.task('default', ['watch']);
