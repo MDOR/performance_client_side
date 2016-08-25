@@ -45,17 +45,13 @@ gulp.task('watch', function () {
   gulp.watch('./*.html', ['html']);
 });
 
-/*Example 1*/
-gulp.task('example1_JS', function() {
-    // Single entry point to browserify
-    gulp.src('maquinas_label_example/maquinas_base/app/maquinas.js')
-        .pipe(
-          browserify({
-            insertGlobals : true,
-          })
-          .transform("babelify", {presets: ["es2015", "react"]})
-        )
-        .pipe(gulp.dest('maquinas_label_example/example_1'))
+/*Example 2*/
+
+gulp.task('example2_concat', function () {
+  return gulp.src([ './maquinas_label_example/example_2/bootstrap.css',
+                    './maquinas_label_example/example_2/maquinas.css'])
+             .pipe(concat('site.css'))
+             .pipe(gulp.dest('./maquinas_label_example/example_2/'));
 });
 
 
