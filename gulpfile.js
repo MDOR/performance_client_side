@@ -8,7 +8,8 @@ var gulp        = require('gulp'),
     uncss       = require('gulp-uncss'),
     cleanCSS    = require('gulp-clean-css'),
     uglify      = require('gulp-uglify'),
-    pump        = require('pump');
+    pump        = require('pump'),
+    gzip        = require('gulp-gzip');
 
 gulp.task('sass', function () {
   return gulp.src('./SCSS/*.scss')
@@ -76,7 +77,7 @@ gulp.task('uncss', function () {
         .pipe(gulp.dest('./maquinas_label_example/example_3/cleaned'));
 });
 
-/*Example of Minification*/
+/*Example 5 Minification*/
 gulp.task('minify-css', function() {
   return gulp.src('./maquinas_label_example/example_5/*.css')
     .pipe(cleanCSS({compatibility: 'ie8'}))
@@ -91,6 +92,13 @@ gulp.task('minify-js', function (cb) {
     ],
     cb
   );
+});
+
+/*Example 6 Compression*/
+gulp.task('gzip-js', function() {
+ gulp.src('./maquinas_label_example/example_6/*.js')
+ .pipe(gzip())
+ .pipe(gulp.dest('./maquinas_label_example/example_6'));
 });
 
 
