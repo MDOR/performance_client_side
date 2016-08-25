@@ -4,7 +4,8 @@ var gulp        = require('gulp'),
     concat      = require('gulp-concat'),
     browserify  = require('gulp-browserify'),
     rename      = require('gulp-rename'),
-    livereload  = require('gulp-livereload');
+    livereload  = require('gulp-livereload'),
+    uncss       = require('gulp-uncss');;
 
 gulp.task('sass', function () {
   return gulp.src('./SCSS/*.scss')
@@ -54,5 +55,22 @@ gulp.task('example2_concat', function () {
              .pipe(gulp.dest('./maquinas_label_example/example_2/'));
 });
 
+/*Example 3 UNCSS*/
+gulp.task('uncss', function () {
+    return gulp.src('./maquinas_label_example/example_3/site.css')
+        .pipe(uncss({
+            html: ['index.html'],
+            timeout: 2000,
+            ignore: [/maquinas-header/, /maquinas-header\:after/, /responsive-img/, /img-container/,
+                     /navbar-menu */, /maquinas-label-form */,/header-form */,
+                     /input/, /nav-bar/, /carousel/, /slide/, /carousel-indicators/,
+                     /carousel-inner/, /carousel-indicators/, /carousel-control/,
+                     /album-content-container/, /maquinas-header-content/,/glyphicon/, /glyphicon-chevron-right/,
+                     /glyphicon-chevron-left/, /s-4/, /s-5/, /s-3-off/, /s-6/, /s-12/, /m-2/, /m-3/, /m-0-off/, /l-1/, /m-6/, /m-3-off/, /l-2/,
+                     /ribbon/, /maquinas-footer/, /l-7/, /l-4/, /button/, /media-link/,
+                     /maquinas-container/, /title/, /col/, /text-center/, /banner/, /background-footer/, /footer-content/]
+        }))
+        .pipe(gulp.dest('./maquinas_label_example/example_3/cleaned'));
+});
 
 gulp.task('default', ['watch']);
