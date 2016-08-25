@@ -8,19 +8,16 @@ body {
   background-color: #343434;
   color: white; }
 
-*:not(.fa) {
+* {
   font-family: 'Roboto', Helvetica !important; }
 
-.fa {
-  font-family: 'FontAwesome' !important;
-  font-style: normal !important;
+.files-concat {
   vertical-align: middle !important; }
-  .fa:before {
+  .files-concat span {
     font-size: 72px;
     line-height: 75px; }
-
-.files-concat .fa:last-child {
-  color: green; }
+    .files-concat span:last-child {
+      color: green; }
 
 h1, h2, h3, h4, h5, h6, a {
   color: #3c948b; }
@@ -87,6 +84,17 @@ a {
   flex-wrap: wrap; }
   .content-container .col-6 {
     flex-basis: 50%; }
+  .content-container .col-4 {
+    flex-basis: 25%; }
+
+.wait {
+  color: white; }
+  .wait.green {
+    background: green; }
+  .wait.blue {
+    background: blue; }
+  .wait.red {
+    background: red; }
 
 .align-left {
   text-align: left; }
@@ -178,8 +186,11 @@ a {
   .circle.circle-CSS {
     left: 320px; }
   .circle.circle-JS {
-    left: 320px;
-    top: 230px; }
+    left: 415px;
+    top: 177px; }
+  .circle.General {
+    top: 177px;
+    left: 224px; }
 
 @keyframes heart-animation {
   0%, 100% {
