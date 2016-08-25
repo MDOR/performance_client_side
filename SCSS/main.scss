@@ -113,7 +113,9 @@ a {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-
+  .col-12 {
+    flex-basis: 100%;
+  }
   .col-6 {
     flex-basis: 50%;
   }
