@@ -11,7 +11,7 @@
             <div class="slides">
                 <section class="first-slide">
                   <h1>Client Side Performance</h1>
-                  <h2>By <a href="https://mx.linkedin.com/in/marco-antonio-dominguez-rueda-a3a974aa" target="_blank" class="special-links">Marco Antonio Dominguez</a></h2>
+                  <h2>By <a href="https://mx.linkedin.com/in/marco-antonio-dominguez-rueda-a3a974aa" target="_blank" class="special-links">Marco Antonio Domínguez</a></h2>
                 </section>
                 <section style="position: relative">
                   <h1>About</h1>
@@ -292,6 +292,91 @@
                         </div>
                         <span class="heart"></span>
                     </div>
+                </section>
+                <section>
+                  <h2>Talking about memory management</h2>
+                  <p>All the browsers have its own <strong>Garbage Collector</strong> to remove unnecessary references.</p>
+                  <p>When referenced variables aren't used anymore they are removed.</p>
+                </section>
+                <section>
+                  <ul>
+                    <li>Avoid namespaces or global variables as you can, they are cleaned just when the user refresh or leave the page</li>
+                    <li>Keep local variables as you can.</li>
+                    <li>Unbind handlers.</li>
+                    <li>Clean storage.</li>
+                  </ul>
+                </section>
+                <section>
+                  <h2>Functions</h2>
+                  <pre class="prettyprint">
+                    //Good
+                    function exec () {
+                      var args = arguments,
+                          temp = 0;
+
+                      for (var i = args.length - 1; i >= 0; i -= 1) {
+                        temp += ~~args[i];
+                      }
+
+                      console.log("Total: %c" + temp, "color: red");
+                    }
+
+                    //Bad
+                    function exec () {
+                      var args = arguments,
+                          temp = 0;
+
+                      for (var i = args.length - 1; i >= 0; i -= 1) {
+                        temp += ~~args[i];
+                      }
+
+                      return temp;
+                    }
+
+                    var result = exec(1, 2, 3, 4);
+                  </pre>
+                </section>
+                <section>
+                  <h2>Timers</h2>
+<pre class="prettyprint">
+/*Bad*/
+var obj = {
+            print: setInterval(function () {
+              console.log("Nasty Code %c I'm not accessible 🌋", "color: red;"),
+            }, 1000)
+          };
+
+obj.print;
+
+obj.print = null;
+
+/*Good*/
+var obj = {
+            print: setInterval(function () {
+              console.log("Nasty Code %c 🌋", "color: red;")
+            }, 1000),
+            clean: function () {
+              console.log("I'm cleaning, print is accessible for GC");
+              clearInterval(this.print);
+            }
+          };
+
+obj.print;
+obj.clean();
+
+</pre>
+                </section>
+                <section>
+                  <h2>Circular references</h2>
+<pre class="prettyprint">
+  var elementActive = document.getElementById('active-div');
+
+  elementActive.innerElements = elementActive;
+  /*Adding More Code to elementActive*/ 
+</pre>
+                </section>
+                <section>
+                  Questions?
                 </section>
             </div>
         </div>
